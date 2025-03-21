@@ -1,0 +1,472 @@
+/* styles.css */
+.body-customer {
+  width: 1150px;
+  height: fit-content;
+  margin: 0 auto;
+}
+
+.body-admin {
+  width: fit-content;
+  height: fit-content;
+  margin: 0 auto;
+}
+
+.inline {
+  display: inline-block;
+}
+
+.caption-right {
+  display: flex;
+  align-items: center;
+}
+
+/* LOGIN_form */
+/* Căn giữa form */
+.login-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 25px;
+  width: 320px;
+  background: #f8f9fa;
+  border-radius: 12px;
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+  text-align: center;
+}
+
+/* Tiêu đề */
+.login-container h2 {
+  margin-bottom: 20px;
+  color: #333;
+}
+
+/* Hiển thị lỗi */
+.error-message {
+  color: #d32f2f;
+  background: #ffebee;
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 15px;
+  font-size: 14px;
+}
+
+/* Form nhập */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.form-group input {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 16px;
+  outline: none;
+  transition: 0.3s;
+}
+
+.form-group input:focus {
+  border-color: #4CAF50;
+  box-shadow: 0px 0px 5px rgba(76, 175, 80, 0.5);
+}
+
+/* Nút đăng nhập */
+.btn-login {
+  width: 100%;
+  padding: 12px;
+  font-size: 16px;
+  font-weight: bold;
+  border: none;
+  border-radius: 8px;
+  background: #4CAF50;
+  color: white;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+/* Hover hiệu ứng */
+.btn-login:hover {
+  background: #43a047;
+}
+
+/* Khi giữ chuột (hold) vào nút */
+.btn-login:active {
+  background: #2e7d32;
+  transform: scale(0.98);
+  transition: 0.1s;
+}
+
+
+.link {
+  cursor: pointer;
+  color: blue;
+  text-decoration: underline;
+}
+
+/* MENU.css */
+/* Reset default styles */
+.menu-container {
+  position: fixed; /* Giữ menu cố định */
+  top: 0; /* Cố định ở đầu trang */
+  left: 0;
+  width: 100%; /* Chiếm toàn bộ chiều ngang */
+  z-index: 1000; /* Đảm bảo menu luôn ở trên */
+  border-bottom: 1px solid #ddd; /* Thêm đường viền dưới */
+  overflow: hidden; /* Xóa float */
+  padding: 10px 0; /* Thêm padding cho container */
+  background-color: #fff; /* Nền trắng */
+}
+
+.menu-wrapper {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.menu-left, .menu-right {
+  padding: 0 15px;
+}
+
+/* Kiểu 1: Thanh ngang với chữ nổi trên nền xám */
+/* Kiểu 1: Thanh menu ngang với hiệu ứng hover */
+.menu.style-1 {
+  background-color: #ff7f00; /* Màu cam */
+  border-radius: 20px;
+  overflow: hidden;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  list-style: none;
+}
+
+/* Các mục menu */
+.menu.style-1 li {
+  display: inline-block;
+  width: 140px;
+  text-align: center;
+  position: relative;
+  transition: transform 0.3s ease-in-out; /* Hiệu ứng scale */
+}
+
+/* Liên kết trong menu */
+.menu.style-1 li a{
+  text-decoration: none;
+  color: white;
+  font-size: 18px;
+  padding: 10px 20px;
+  display: inline-block;
+  transition: background 0.3s ease-in-out, color 0.3s ease-in-out;
+  border-radius: 20px;
+}
+
+/* Hover: thay đổi màu nền, scale và thêm gạch chân */
+.menu.style-1 li:hover {
+  transform: scale(1.1); /* Hiệu ứng phóng to nhẹ */
+}
+
+.menu.style-1 li a:hover {
+  background-color: #ffcc80; /* Màu cam nhạt khi hover */
+  color: #333;
+}
+
+/* Hiệu ứng underline khi hover */
+.menu.style-1 li::after {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 3px;
+  background-color: white;
+  bottom: -5px;
+  left: 50%;
+  transition: width 0.3s ease-in-out, left 0.3s ease-in-out;
+}
+
+/* Khi hover, underline mở rộng */
+.menu.style-1 li:hover::after {
+  width: 0;
+  left: 0;
+}
+
+
+.menu.style-1 a {
+  display: block;
+  padding: 15px 0;
+  color: #fff;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background-color 0.3s;
+}
+
+.menu.style-1 a:nth-child(2) {
+  background-color: #a3e4d7; /* Nổi bật cho "Category" */
+}
+
+.menu.style-1 a:hover {
+  opacity: 0.8;
+}
+
+/* Style cho phần menu-right (bên phải) */
+.menu-right {
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+}
+
+.menu-right a{
+  color: #1abc9c;
+  text-decoration: none;
+  margin-left: 10px;
+  font-weight: bold;
+}
+
+.menu-right a:hover {
+  text-decoration: underline;
+}
+
+.menu-right b {
+  color: #333;
+  margin: 0 5px;
+}
+
+.float-clear {
+  clear: both;
+}
+/* Admin Home */
+/* Căn giữa toàn bộ trang */
+.admin-home {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+/* Thẻ chứa nội dung chính */
+.welcome-card {
+  text-align: center;
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+  animation: fadeIn 1s ease-in-out;
+  max-width: 600px;
+}
+
+/* Tiêu đề */
+.welcome-card h1 {
+  font-size: 28px;
+  color: #2c3e50;
+  margin-bottom: 10px;
+}
+
+/* Đoạn mô tả */
+.welcome-card p {
+  font-size: 16px;
+  color: #555;
+  margin-bottom: 20px;
+}
+
+/* Hình ảnh */
+.admin-image {
+  width: 100%;
+  max-width: 400px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease-in-out;
+}
+
+/* Hiệu ứng hover */
+.admin-image:hover {
+  transform: scale(1.05);
+}
+
+/* Hiệu ứng mờ dần */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* CATEGORY */
+.category-container {
+  margin-top: 150px; /* Đẩy xuống dưới menu */
+  display: flex;
+  align-items: flex-start;
+  gap: 30px;
+}
+
+.table-container {
+  flex: 2;
+  text-align: left;
+  max-width: 600px;
+}
+
+.datatable {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.datatable th, .datatable td {
+  border: 1px solid #ddd;
+  padding: 10px;
+}
+
+.datatable th {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.datatable tbody tr:hover {
+  background-color: #f1f1f1;
+}
+
+/* Form chi tiết danh mục */
+
+
+/* Ảnh sản phẩm */
+.product-image {
+  width: 80px;
+  height: 80px;
+  border-radius: 5px;
+  object-fit: cover;
+}
+
+/* Cột phải - Thanh nhập dữ liệu */
+.input-form {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 20px;
+  background: #f8f8f8;
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.input-form h3 {
+  text-align: center;
+}
+
+.input-form input, .input-form button {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.input-form button {
+  background: #4CAF50;
+  color: white;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.input-form button:hover {
+  background: #45a049;
+}
+
+.category-detail {
+  width: 350px;
+  padding: 20px;
+  background: #f8f8f8;
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.category-detail h2 {
+  margin-bottom: 15px;
+  color: #333;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+}
+
+.form-group label {
+  font-weight: bold;
+  margin-bottom: 5px;
+  text-align: left;
+}
+
+.form-group input {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  outline: none;
+}
+
+.button-group {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
+}
+
+.btn {
+  padding: 8px 15px;
+  font-size: 14px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btn.add {
+  background: #4CAF50;
+  color: white;
+}
+
+.btn.update {
+  background: #2196F3;
+  color: white;
+}
+
+.btn.delete {
+  background: #F44336;
+  color: white;
+}
+
+.btn:hover {
+  opacity: 0.8;
+  transform: scale(1.05);
+}
+
+/* Product */
+.product-container {
+  margin-top: 150px;
+  margin-right: 100px; /* Đẩy xuống dưới menu */
+  display: flex;
+  align-items: flex-start;
+  gap: 30px;
+}
+
+.product-detail {
+  flex: 1;
+  margin-left: 100px;
+  padding: 20px;
+  background: #f8f8f8;
+  border-radius: 10px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.product-detail h2 {
+  margin-bottom: 15px;
+  color: #333;
+}
