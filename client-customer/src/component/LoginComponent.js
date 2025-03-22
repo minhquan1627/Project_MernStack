@@ -23,7 +23,7 @@ class Login extends Component {
     if (this.context.token === "") {
       return (
         <div className="login-container">
-          <h2 className="text-center">ADMIN LOGIN</h2>
+          <h2 className="text-center">LOGIN</h2>
 
           {this.state.errorMessage && <p className="error-message">{this.state.errorMessage}</p>}
 
@@ -51,7 +51,7 @@ class Login extends Component {
             </button>
             {/* Nút đăng ký */}
             <button type="button" className="btn-register" onClick={this.btnRegisterClick}>
-              ĐĂNG KÝ
+              REGISTER
             </button>
           </form>
         </div>
@@ -82,6 +82,8 @@ class Login extends Component {
         this.context.setToken(result.token);
         this.context.setUsername(account.username);
         this.setState({ errorMessage: "" });
+        this.setState({ errorMessage: "", loading: false });
+        this.props.navigate("/main");
       } else {
         this.setState({ errorMessage: result.message });
       }

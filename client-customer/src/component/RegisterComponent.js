@@ -19,7 +19,7 @@ class Register extends Component {
 
   render() {
     return (
-      <div className="register-container">
+      <div className="login-container">
         <h2 className="text-center">REGISTER</h2>
         {this.state.errorMessage && <p className="error-message">{this.state.errorMessage}</p>}
 

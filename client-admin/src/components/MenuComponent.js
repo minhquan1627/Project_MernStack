@@ -21,7 +21,6 @@ class Menu extends Component {
         <div className="menu-right">
           Hello
           <b>{this.context.username}</b> |{" "}
-          <a href="#" onClick={(e) => this.lnkLogoutClick(e)}>Logout</a>
           <Link to="/admin/home" onClick={() => this.lnkLogoutClick()}>Logout</Link>
         </div>
       </div>
