@@ -451,7 +451,7 @@
 /* Product */
 .product-container {
   margin-top: 150px;
-  margin-right: 100px; /* Đẩy xuống dưới menu */
+  margin-right: 200px; /* Đẩy xuống dưới menu */
   display: flex;
   align-items: flex-start;
   gap: 30px;
@@ -459,7 +459,7 @@
 
 .product-detail {
   flex: 1;
-  margin-left: 100px;
+  margin-left: 200px;
   padding: 20px;
   background: #f8f8f8;
   border-radius: 10px;
