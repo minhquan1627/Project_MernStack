@@ -8,6 +8,7 @@ const JwtUtil = require('../utils/JwtUtil');
 const AdminDAO = require('../models/AdminDAO');
 const CategoryDAO = require('../Models/CategoryDAO');
 const ProductDAO = require('../Models/ProductDAO');
+const CustomerDAO = require('../Models/CustomerDAO');
 
 // Login
 router.post('/login', async function (req, res) {
@@ -217,6 +218,64 @@ router.delete('/products/:id', JwtUtil.checkToken, async function (req, res) {
     // Xử lý lỗi nếu có
     console.error('Error deleting product:', error);
     res.status(500).json({ message: 'Server error' });
+  }
+});
+
+
+// Lấy danh sách khách hàng
+router.get('/customer', JwtUtil.checkToken, async function (req, res) {
+  try {
+    const customers = await CustomerDAO.selectAll();
+    res.json(customers);
+  } catch (error) {
+    console.error("Error fetching customers:", error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
+// Thêm khách hàng mới
+router.post('/customer', JwtUtil.checkToken, async function (req, res) {
+  try {
+    const { username, password, name, phone, email } = req.body;
+    if (!username || !password || !name || !phone || !email) {
+      return res.status(400).json({ error: 'All fields are required' });
+    }
+
+    const newCustomer = await CustomerDAO.insert({ username, password, name, phone, email });
+    res.status(201).json(newCustomer);
+  } catch (error) {
+    console.error("Error adding customer:", error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
+// Cập nhật thông tin khách hàng
+router.put('/customer/:id', JwtUtil.checkToken, async function (req, res) {
+  try {
+    const _id = req.params.id;
+    const { username, password, name, phone, email } = req.body;
+    if (!username || !name || !phone || !email) {
+      return res.status(400).json({ error: 'Missing required fields' });
+    }
+
+    const customer = { _id, username, password, name, phone, email };
+    const result = await CustomerDAO.update(customer);
+    res.json(result);
+  } catch (error) {
+    console.error("Error updating customer:", error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
+
+// Xóa khách hàng
+router.delete('/customer/:id', JwtUtil.checkToken, async function (req, res) {
+  try {
+    const _id = req.params.id;
+    const result = await CustomerDAO.delete(_id);
+    res.json(result);
+  } catch (error) {
+    console.error("Error deleting customer:", error);
+    res.status(500).json({ error: 'Internal Server Error' });
   }
 });
 

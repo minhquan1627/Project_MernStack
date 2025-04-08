@@ -1,34 +1,26 @@
-import "./App.css";
-import React, { Component } from "react";
-import { createBrowserRouter, RouterProvider, Navigate } from "react-router-dom";
+import "./App.css"
+import  React, { Component } from "react";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import MyProvider from "./contexts/MyProvider";
 import Login from "./component/LoginComponent";
 import Register from "./component/RegisterComponent";
-import Main from "./component/MainComponent"; // Thay Home thành Main
-
-const router = createBrowserRouter(
-  [
-    { path: "/login", element: <Login /> },
-    { path: "/register", element: <Register /> },
-    { path: "/main", element: <Main /> },
-    { path: "*", element: <Navigate to="/login" replace /> },
-  ],
-  {
-    future: {
-      v7_startTransition: true, // Bật hỗ trợ React 18+
-    },
-  }
-);
+import Main from "./component/MainComponent";
 
 class App extends Component {
   render() {
     return (
       <MyProvider>
-        <RouterProvider router={router} />
+        <BrowserRouter>
+          <Routes>
+            <Route path="/customer/login" element={<Login />} />
+            <Route path="/customer/register" element={<Register />} />
+            <Route path="/customer/*" element={<Main />} />
+            <Route path="*" element={<Navigate replace to="/customer/home"/>} />
+          </Routes>
+        </BrowserRouter>
       </MyProvider>
     );
   }
 }
 
 export default App;
-

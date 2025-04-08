@@ -1,42 +1,50 @@
-import React, { Component } from "react";
-import MyContext from "../contexts/MyContext";
+import axios from "axios";
+import React, { useState, useEffect, useCallback } from "react";
 import { Link } from "react-router-dom";
 
-class Menu extends Component {
-  static contextType = MyContext; // Sử dụng context
+const Menu = () => {
+  const [categories, setCategories] = useState([]);
 
-  render() {
-    return (
-      <div className="menu-container">
-        <div className="menu-wrapper">
-          {/* Menu bên trái */}
-          <div className="menu-left">
-            <ul className="menu style-1">
-              <li><Link to="/main">Home</Link></li>
-              <li><Link to="/customer/category">Category</Link></li>
-              <li><Link to="/customer/product">Product</Link></li>
-              <li><Link to="/customer/order">Order</Link></li>
-              <li><Link to="/customer/customer">Customer</Link></li>
-            </ul>
-          </div>
+  const apiGetCategories = useCallback(() => {
+    axios
+      .get("/api/customer/categories")
+      .then((res) => {
+        console.log("API Response:", res.data);
+        if (Array.isArray(res.data)) {
+          setCategories(res.data);
+        }
+      })
+      .catch((err) => console.error("API Error:", err));
+  }, []);
 
-          {/* Menu bên phải */}
-          <div className="menu-right">
-            Hello, <b>{this.context.username}</b> |{" "}
-            <Link to="/login" onClick={(e) => this.lnkLogoutClick(e)}>Logout</Link>
-          </div>
-        </div>
+  useEffect(() => {
+    apiGetCategories();
+  }, [apiGetCategories]);
+
+  return (
+    <div className="menu-container">
+      <div className="float-left">
+        <ul className="menu">
+          <li className="menu">
+            <Link to="/customer/home">Home</Link>
+          </li>
+          {/* Đã xóa dòng item chưa khai báo */}
+          {categories.map((item) => (
+            <li key={item._id} className="menu">
+              <Link to={`/customer/product/category/${item._id}`}>{item.name}</Link>
+            </li>
+          ))}
+        </ul>
       </div>
-    );
-  }
-
-  // Xử lý đăng xuất
-  lnkLogoutClick = (e) => {
-    e.preventDefault();
-    this.context.setToken("");
-    this.context.setUsername("");
-    window.location.href = "/login"; // Chuyển hướng về trang đăng nhập
-  };
-}
+      <div className="float-right">
+        <form className="search">
+          <input type="search" placeholder="Enter keyword" className="keyword" />
+          <input type="submit" value="SEARCH" />
+        </form>
+      </div>
+      <div className="float-clear" />
+    </div>
+  );
+};
 
 export default Menu;

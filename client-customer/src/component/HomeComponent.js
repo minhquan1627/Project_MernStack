@@ -1,20 +1,83 @@
-import React, { Component } from "react";
+import axios from 'axios';
+import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 class Home extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      newprods: [],
+      hotprods: [],
+    };
+  }
+
   render() {
-    return (
-      <div className="admin-home">
-        <div className="welcome-card">
-          <h1>🎉 Chào mừng đến với Trang Người Dùng 🎉</h1>
-          <p>Quản lý hệ thống của bạn dễ dàng, nhanh chóng và hiệu quả.</p>
-          <img
-            src="https://cdn.dribbble.com/users/108183/screenshots/2572277/media/6f0dd03cc78678ebf7f79830c6f1174a.gif"
-            alt="Admin Home"
-            className="admin-image"
-          />
+    const newprods = this.state.newprods.map((item) => {
+      return (
+        <div key={item._id} className="inline">
+          <figure>
+            <Link to={'/customer/product/' + item._id}>
+              <img src={"data:image/jpg;base64," + item.image} width="300px" height="300px" alt="" />
+            </Link >
+            <figcaption className="text-center">
+              {item.name} <br /> Price: {item.price}
+            </figcaption>
+          </figure>
         </div>
+      );
+    });
+
+    const hotprods = this.state.hotprods.map((item) => {
+      return (
+        <div key={item._id} className="inline">
+          <figure>
+            <Link to={'/customer/product/' + item._id}>
+              <img src={"data:image/jpg;base64," + item.image} width="300px" height="300px" alt="" />
+            </Link>
+            <figcaption className="text-center">
+              {item.name} <br /> Price: {item.price}
+            </figcaption>
+          </figure>
+        </div>
+      );
+    });
+
+    return (
+      <div>
+        <div className="align-center">
+          <h2 className="text-center">NEW PRODUCTS</h2>
+          {newprods}
+        </div>
+        {this.state.hotprods.length > 0 ? (
+          <div className="align-center">
+            <h2 className="text-center">HOT PRODUCTS</h2>
+            {hotprods}
+          </div>
+        ) : (
+          <div />
+        )}
       </div>
     );
+  }
+
+  componentDidMount() {
+    this.apiGetNewProducts();
+    this.apiGetHotProducts();
+  }
+
+  // APIs
+  apiGetNewProducts() {
+    axios.get('/api/customer/product/new').then((res) => {
+      const result = res.data;
+      this.setState({ newprods: result });
+    });
+  }
+
+  apiGetHotProducts() {
+    axios.get('/api/customer/product/hot').then((res) => {
+      const result = res.data;
+      this.setState({ hotprods: result });
+    });
   }
 }
 

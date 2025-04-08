@@ -32,7 +32,6 @@ class Product extends Component {
       );
     });
 
-    const MAX_VISIBLE_PAGES = 5; // Số trang tối đa hiển thị
 
     const renderPagination = () => {
       const { curPage, noPages } = this.state;
@@ -94,7 +93,7 @@ class Product extends Component {
             </tbody>
             <tfoot>
               <tr>
-                <td colSpan="6">{renderPagination}</td>
+                <td colSpan="6">{renderPagination()}</td>
               </tr>
             </tfoot>
           </table>

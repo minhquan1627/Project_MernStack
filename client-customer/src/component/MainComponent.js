@@ -1,26 +1,32 @@
+import { Routes, Route, Navigate } from 'react-router-dom';
 import React, { Component } from 'react';
-import MyContext from '../contexts/MyContext';
 import Menu from './MenuComponent';
+import Inform from './InformComponent';
 import Home from './HomeComponent';
-import { Routes , Route , Navigate } from 'react-router-dom';
-
+import ProductDetail from './ProductDetailComponent';
+import Product from './ProductComponent'; 
 
 class Main extends Component {
-  static contextType = MyContext; // using this.context to access global state
-
   render() {
-    if (this.context.token !== '') {
-      return (
-        <div className="body-admin">
-          <Menu/>
-          <Routes>
-            <Route path="/customer" element={<Navigate replace to="/customer/home"/>} />
-            <Route path="/customer/main" element={<Home/>} />
-          </Routes>
-        </div>
-      );
-    }
-    return <div />;
+    return (
+      <div className="body-customer">
+        {/* Navbar and notification */}
+        <Menu />
+        <Inform />
+
+        {/* Main routing area */}
+        <Routes>
+          {/* Redirect from root to /home */}
+          <Route path="/" element={<Navigate replace to="/home" />} />
+
+          {/* Main routes */}
+          <Route path="/home" element={<Home />} />
+          <Route path="/product/category/:cid" element={<Product />} />
+          <Route path="/product/search/:keyword" element={<Product />} />
+          <Route path="/product/:id" element={<ProductDetail />} />
+        </Routes>
+      </div>
+    );
   }
 }
 

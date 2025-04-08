@@ -1,95 +1,86 @@
-import { withRouter } from "../contexts/withRouter";
-import axios from "axios";
-import React, { Component } from "react";
-import MyContext from "../contexts/MyContext";
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import React, { useState, useContext } from 'react';
+import MyContext from '../contexts/MyContext';
 
-class Login extends Component {
-  static contextType = MyContext;
+const Login = () => {
+  const { setToken, setUsername } = useContext(MyContext);
+  const [txtUsername, setTxtUsername] = useState('');
+  const [txtPassword, setTxtPassword] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      txtUsername: "",
-      txtPassword: "",
-      errorMessage: "",
-   
-    };
-    
-  }
-  btnRegisterClick = () => {
-    this.props.navigate("/register"); // Sử dụng navigate từ props
+  const btnRegisterClick = () => {
+    navigate("/customer/register");
   };
-  render() {
-    if (this.context.token === "") {
-      return (
-        <div className="login-container">
-          <h2 className="text-center">LOGIN</h2>
 
-          {this.state.errorMessage && <p className="error-message">{this.state.errorMessage}</p>}
-
-          <form>
-            <div className="form-group">
-              <label>Username</label>
-              <input
-                type="text"
-                value={this.state.txtUsername}
-                onChange={(e) => this.setState({ txtUsername: e.target.value })}
-              />
-            </div>
-
-            <div className="form-group">
-              <label>Password</label>
-              <input
-                type="password"
-                value={this.state.txtPassword}
-                onChange={(e) => this.setState({ txtPassword: e.target.value })}
-              />
-            </div>
-
-            <button type="submit" className="btn-login" onClick={this.btnLoginClick}>
-              LOGIN
-            </button>
-            {/* Nút đăng ký */}
-            <button type="button" className="btn-register" onClick={this.btnRegisterClick}>
-              REGISTER
-            </button>
-          </form>
-        </div>
-      );
-    }
-    return <div />;
-  }
-
-  // Xử lý sự kiện đăng nhập
-  btnLoginClick = (e) => {
+  const btnLoginClick = (e) => {
     e.preventDefault();
-    const { txtUsername, txtPassword } = this.state;
-
     if (!txtUsername.trim() || !txtPassword.trim()) {
-      this.setState({ errorMessage: "⚠️ Vui lòng nhập đầy đủ Username và Password!" });
+      setErrorMessage("⚠️ Vui lòng nhập đầy đủ Username và Password!");
       return;
     }
 
     const account = { username: txtUsername, password: txtPassword };
-    this.apiLogin(account);
+    apiLogin(account);
   };
 
-  // Gọi API đăng nhập
-  apiLogin(account) {
+  const apiLogin = (account) => {
+    setLoading(true);
     axios.post("/api/customer/login", account).then((res) => {
       const result = res.data;
       if (result.success === true) {
-        this.context.setToken(result.token);
-        this.context.setUsername(account.username);
-        this.setState({ errorMessage: "" });
-        this.setState({ errorMessage: "", loading: false });
-        this.props.navigate("/main");
+        setToken(result.token);
+        setUsername(account.username);
+        setErrorMessage("");
+        setLoading(false);
+        navigate("/main");
       } else {
-        this.setState({ errorMessage: result.message });
+        setErrorMessage(result.message);
+        setLoading(false);
       }
     });
+  };
+
+  if (loading) {
+    return <div>Đang đăng nhập...</div>;
   }
-}
 
+  return (
+    <div className="login-container">
+      <h2 className="text-center">LOGIN</h2>
 
-export default withRouter(Login);
+      {errorMessage && <p className="error-message">{errorMessage}</p>}
+
+      <form>
+        <div className="form-group">
+          <label>Username</label>
+          <input
+            type="text"
+            value={txtUsername}
+            onChange={(e) => setTxtUsername(e.target.value)}
+          />
+        </div>
+
+        <div className="form-group">
+          <label>Password</label>
+          <input
+            type="password"
+            value={txtPassword}
+            onChange={(e) => setTxtPassword(e.target.value)}
+          />
+        </div>
+
+        <button type="submit" className="btn-login" onClick={btnLoginClick}>
+          LOGIN
+        </button>
+        <button type="button" className="btn-register" onClick={btnRegisterClick}>
+          REGISTER
+        </button>
+      </form>
+    </div>
+  );
+};
+
+export default Login;
