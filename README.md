@@ -16,7 +16,7 @@ Triển khai bằng `Docker Compose`, đảm bảo dễ dàng cài đặt, quả
 #### Clone dự án
 ```bash
 git clone https://github.com/minhquan1627/Project_MernStack.git
-cd vlu-lantran/PhucAn-wen-dev 
+cd minhquan1627/Project_MernStack
 ```
 #### Cài Đặt Docker
 - Đã cài đặt [Docker Desktop](https://www.docker.com/products/docker-desktop/)
