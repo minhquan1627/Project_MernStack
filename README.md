@@ -15,7 +15,7 @@ Triển khai bằng `Docker Compose`, đảm bảo dễ dàng cài đặt, quả
 ### 1. Cài đặt yêu cầu
 #### Clone dự án
 ```bash
-git clone https://github.com/minhquan1627/Project_Mernstack.git
+git clone https://github.com/minhquan1627/Project_MernStack.git
 cd vlu-lantran/PhucAn-wen-dev 
 ```
 #### Cài Đặt Docker
