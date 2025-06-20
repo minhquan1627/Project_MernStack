@@ -15,7 +15,7 @@ Triển khai bằng `Docker Compose`, đảm bảo dễ dàng cài đặt, quả
 ### 1. Cài đặt yêu cầu
 #### Clone dự án
 ```bash
-git clone https://github.com/vlu-lantran/PhucAn-web-dev.git
+git clone https://github.com/minhquan1627/Project_Mernstack.git
 cd vlu-lantran/PhucAn-wen-dev 
 ```
 #### Cài Đặt Docker
@@ -23,21 +23,6 @@ cd vlu-lantran/PhucAn-wen-dev
 - Hệ điều hành Windows, macOS hoặc Linux đều hỗ trợ
 
 ### 2. Các bước thực hiện
-#### Cấu trúc Hệ Thống Của Dự án
-.
-├── docker-compose.yml
-├── Server/                (Flask Backend)
-│   ├── app.py
-│   ├── Models/
-│   └── Dockerfile
-├── client-customer/       (React Customer Frontend)
-│   ├── src/
-│   ├── public/
-│   └── Dockerfile
-├── client-admin/          (React Admin Frontend)
-│   ├── src/
-│   ├── public/
-│   └── Dockerfile
 
 1. **Mở Terminal / CMD / PowerShell** tại thư mục gốc của dự án
 2. **Chạy lệnh sau để khởi động toàn bộ hệ thống**
