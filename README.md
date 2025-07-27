@@ -1,39 +1,39 @@
 # Phuc An Website – Docker Compose Setup
 
-Dự án bao gồm 3 phần chính:
+The project consists of 3 main parts:
 
-- **Server (Backend)**: Python (Flask/FastAPI) tại thư mục `Server/`, chạy ở cổng `3000`
-- **Giao diện Admin**: Giao diện quản lý, tại thư mục `client-admin/`, chạy ở cổng `3001`
-- **Giao diện Khách hàng**: Giao diện khách hàng, tại thư mục `client-customer/`, chạy ở cổng `3002`
+- **Server (Backend)**: Python (Flask/FastAPI) located in the `Server/` directory, running on port `3000`
+- **Admin Interface**: Admin dashboard UI, located in the `client-admin/`directory, running on port `3001`
+- **Customer Interface**: Customer-facing UI, located in the `client-customer/`directory, running on port `3002`
 
-Triển khai bằng `Docker Compose`, đảm bảo dễ dàng cài đặt, quản lý và mở rộng.
+Deployed using `Docker Compose`, ensuring easy installation, management, and scalability.
 
 ---
 
-## Cách Khởi Động Hệ Thống
+## How to Start the System
 
-### 1. Cài đặt yêu cầu
-#### Clone dự án
+### 1. Requirements
+#### Clone the project
 ```bash
 git clone https://github.com/minhquan1627/Project_MernStack.git
 cd minhquan1627/Project_MernStack
 ```
-#### Cài Đặt Docker
-- Đã cài đặt [Docker Desktop](https://www.docker.com/products/docker-desktop/)
-- Hệ điều hành Windows, macOS hoặc Linux đều hỗ trợ
+#### Install Docker
+- Make sure Docker Desktop is installed (https://www.docker.com/products/docker-desktop/)
+- Supports Windows, macOS, or Linux
 
-### 2. Các bước thực hiện
+### 2. Steps to run
 
-1. **Mở Terminal / CMD / PowerShell** tại thư mục gốc của dự án
-2. **Chạy lệnh sau để khởi động toàn bộ hệ thống**
+1. **Open Terminal / CMD / PowerShell in the root directory of the project**
+2. **Run the following command to start the whole system**
 
 ```bash
 docker compose up --build
 ```
-Lưu ý: Lần đầu khởi động sẽ mất vài phút để Docker tải ảnh và build container.
+Note: The first time you run it, Docker will take a few minutes to pull images and build containers.
 
-### 3. Cấu hình môi trường
-mở file .env trong thư mục Server/ nếu cần kết nối DB hay cấu hình nội bộ 
+### 3. Environment Configuration
+Open the .env file inside the Server/ directory if you need to configure database or internal settings:
 ```env
 DB_USER=minhquan1627
 DB_PASS=minhquan1627
@@ -44,32 +44,32 @@ DB_NAME=Database
 # mongodb+srv://<DB_USER>:<DB_PASS>@<DB_SERVER>/<DB_NAME>?retryWrites=true&w=majority
 ```
 
-### 4. Build & chạy production
+### 4.  Build & Run in Production
 
 ```bash
 docker-compose build
 docker-compose up -d
 ```
 
-### 5. Truy cập vào website
+### 5. Access the Website
 
-| Dịch vụ          | Địa chỉ truy cập                               |
+| Service          | Access URL                                     |
 | ---------------- | ---------------------------------------------- |
 | Backend API      | [http://localhost:3000](http://localhost:3000) |
 | Customer Website | [http://localhost:3002](http://localhost:3002) |
 | Admin Website    | [http://localhost:3001](http://localhost:3001) |
 
-## Triển khai production thực tế
-### Hướng dẫn chọn API UR
-theo từng môi trường
+## Real-world Production Deployment
+### Choosing the API URL
+Based on the environment:
 
-| Trường hợp                       | Biến cần dùng                                   |
-| -------------------------------- | ----------------------------------------------- |
-| Chạy bằng `docker-compose` local | `REACT_APP_API_BASE_URL=http://backend:3000`    |
-| Chạy với domain + Nginx + SSL    | `REACT_APP_API_BASE_URL=https://api.domain.com` |
+| Scenario                            | Environment Variable                            |
+| ----------------------------------- | ----------------------------------------------- |
+| Running with local `docker-compose` | `REACT_APP_API_BASE_URL=http://backend:3000`    |
+| Running with domain + Nginx + SSL   | `REACT_APP_API_BASE_URL=https://api.domain.com` |
 
-#### Ví dụ khi dùng domain thực:
-Giả sử bạn đã trỏ:
+#### Example using real domain:
+Assuming you’ve pointed:
 
 https://admin.yourdomain.com → cổng 3001 (client-admin)
 
@@ -80,7 +80,7 @@ https://api.yourdomain.com → cổng 3000 (backend)
 ```env
 REACT_APP_API_BASE_URL=https://api.yourdomain.com
 ```
-Sau khi chỉnh sửa .env, hãy build lại frontend:
+After updating the .env, rebuild the frontend:
 ```bash
 # Trong thư mục client-customer
 docker-compose build client-customer
